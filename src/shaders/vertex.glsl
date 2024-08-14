@@ -14,6 +14,12 @@ void main(){
 
     vec3 newPosition = position;
 
+    //Expolsion
+    float explodingProgress = remap(uProgress, 0.0, 0.1, 0.0, 1.0);
+    explodingProgress = clamp(explodingProgress, 0.0, 1.0);
+    explodingProgress = 1.0- pow(1.0 - explodingProgress, 3.0);
+    newPosition *= explodingProgress;
+
     //Final Position
     vec4 modelPosition = modelMatrix * vec4(newPosition, 1.0);
     vec4 viewPosition = viewMatrix * modelPosition;
