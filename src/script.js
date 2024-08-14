@@ -106,12 +106,12 @@ const createFirework = (count, position, size, texture, radius, color) => {
       Math.random() * Math.PI,
       Math.random() * Math.PI * 2
     );
-    const jaga = new THREE.Vector3();
-    jaga.setFromSpherical(spherical);
+    const position = new THREE.Vector3();
+    position.setFromSpherical(spherical);
 
-    positionsArray[i3] = jaga.x;
-    positionsArray[i3 + 1] = jaga.y;
-    positionsArray[i3 + 2] = jaga.z;
+    positionsArray[i3] = position.x;
+    positionsArray[i3 + 1] = position.y;
+    positionsArray[i3 + 2] = position.z;
 
     sizesArray[i] = Math.random();
     timeMultipliersArray[i] = 1.0 + Math.random();
@@ -125,10 +125,10 @@ const createFirework = (count, position, size, texture, radius, color) => {
     "aSize",
     new THREE.Float32BufferAttribute(sizesArray, 1)
   );
-    geometry.setAttribute(
-      "aTimeMultiplier",
-      new THREE.Float32BufferAttribute(timeMultipliersArray, 1)
-    );
+  geometry.setAttribute(
+    "aTimeMultiplier",
+    new THREE.Float32BufferAttribute(timeMultipliersArray, 1)
+  );
   //Materials
   texture.flipY = false;
   const material = new THREE.ShaderMaterial({
@@ -165,25 +165,24 @@ const createFirework = (count, position, size, texture, radius, color) => {
   });
 };
 
-createFirework(
-  100, //Count
-  new THREE.Vector3(), //position
-  0.5, //Size
-  textures[7], //Textures
-  1, //radius
-  new THREE.Color("#8affff") //Color
-);
-
-window.addEventListener("click", () => {
-  createFirework(
-    100, //Count
-    new THREE.Vector3(), //position
-    0.5, //Size
-    textures[7], //Textures
-    1, //radius
-    new THREE.Color("#8affff") //Color
+const createRandomFireworks = () => {
+  const count = Math.round(400 + Math.random() * 1000);
+  const position = new THREE.Vector3(
+    (Math.random() - 0.5) * 2,
+    Math.random(),
+    (Math.random() - 0.5) * 2
   );
-});
+  const size = 0.1 + Math.random() * 0.1;
+  const texture = textures[Math.floor(Math.random() * textures.length)];
+  const radius = 0.5 + Math.random();
+  const color = new THREE.Color();
+  color.setHSL(Math.random(), 1, 0.7);
+
+  createFirework(count, position, size, texture, radius, color);
+};
+createRandomFireworks();
+
+window.addEventListener("click", createRandomFireworks);
 
 /**
  * Animate
