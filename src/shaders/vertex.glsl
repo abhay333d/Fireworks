@@ -32,7 +32,11 @@ void main(){
     float sizeProgress = min(sizeOpeningProgress, sizeClosingProgress );
     sizeProgress = clamp(sizeProgress, 0.0, 1.0);
 
-
+    //Twinkling
+    float TwinklingProgress = remap(uProgress, 0.2, 0.8, 0.0, 1.0);
+    TwinklingProgress = clamp(TwinklingProgress, 0.0, 1.0);
+    float sizeTwinkling = sin(uProgress * 30.0) * 0.5 + 0.5;
+    sizeTwinkling = 1.0 - sizeTwinkling * TwinklingProgress;
 
     //Final Position
     vec4 modelPosition = modelMatrix * vec4(newPosition, 1.0);
@@ -40,6 +44,6 @@ void main(){
     gl_Position = projectionMatrix * viewPosition;
 
     //Final Size
-    gl_PointSize = uSize * uResolution.y * aSize * sizeProgress;
+    gl_PointSize = uSize * uResolution.y * aSize * sizeProgress * sizeTwinkling;
     gl_PointSize *= 1.0/ - viewPosition.z;
 }
