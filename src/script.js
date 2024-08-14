@@ -96,6 +96,7 @@ const createFirework = (count, position, size, texture, radius, color) => {
   //Geometry
   const positionsArray = new Float32Array(count * 3);
   const sizesArray = new Float32Array(count);
+  const timeMultipliersArray = new Float32Array(count);
 
   for (let i = 0; i < count; i++) {
     const i3 = i * 3;
@@ -113,6 +114,7 @@ const createFirework = (count, position, size, texture, radius, color) => {
     positionsArray[i3 + 2] = jaga.z;
 
     sizesArray[i] = Math.random();
+    timeMultipliersArray[i] = 1.0 + Math.random();
   }
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute(
@@ -123,6 +125,10 @@ const createFirework = (count, position, size, texture, radius, color) => {
     "aSize",
     new THREE.Float32BufferAttribute(sizesArray, 1)
   );
+    geometry.setAttribute(
+      "aTimeMultiplier",
+      new THREE.Float32BufferAttribute(timeMultipliersArray, 1)
+    );
   //Materials
   texture.flipY = false;
   const material = new THREE.ShaderMaterial({
