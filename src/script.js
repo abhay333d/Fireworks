@@ -3,8 +3,8 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { Sky } from "three/examples/jsm/Addons.js";
 import GUI from "lil-gui";
 import gsap from "gsap";
-import fireworksVertexShader from "./shaders/vertex.glsl";
-import fireworksFragmentShader from "./shaders/fragment.glsl";
+import fireworksVertexShader from "./shaders/fireworks/vertex.glsl";
+import fireworksFragmentShader from "./shaders/fireworks/fragment.glsl";
 /**
  * Base
  */
