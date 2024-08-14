@@ -160,7 +160,7 @@ const createFirework = (count, position, size, texture, radius, color) => {
   //Animate
   gsap.to(material.uniforms.uProgress, {
     value: 1,
-    duration: 5,
+    duration: 3,
     ease: "linear",
     onComplete: destroy,
   });
